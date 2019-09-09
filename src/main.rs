@@ -1,4 +1,4 @@
-use actix_web::{http, web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use futures::future::{ok, Future};
 
 
@@ -13,7 +13,7 @@ fn main() {
         App::new()
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8088")
+    .bind("0.0.0.0:8088")
     .unwrap()
     .run()
     .unwrap();
@@ -22,7 +22,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use actix_web::test;
+    use actix_web::{http, test};
 
     #[test]
     fn test_index_ok() {
